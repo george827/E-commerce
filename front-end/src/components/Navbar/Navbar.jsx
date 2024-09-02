@@ -9,16 +9,16 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img src={Logo} alt="logo"    />
+        <img src={Logo} alt="logo"/>
         <p>shopper</p>
       </div>
       <ul className="nav-menu">
         <li onClick={()=> {setMenu("shop")}}>
-          shop <hr />
+          shop {menu==="mens"? <hr/> : <></>}
         </li>
-        <li onClick={()=> {setMenu("mens")}}>men</li>
-        <li onClick={()=> {setMenu("women")}}>women</li>
-        <li onClick={()=> {setMenu("kids")}}>kids</li>
+        <li onClick={()=> {setMenu("mens")}}>men{menu==="mens"? <hr/> : <></>}</li>
+        <li onClick={()=> {setMenu("women")}}>women{menu==="women"? <hr/> : <></>}</li>
+        <li onClick={()=> {setMenu("kids")}}>kids{menu==="kids"? <hr/> : <></>}</li>
       </ul>
       <div className="nav-login-cart">
         <button>login</button>
