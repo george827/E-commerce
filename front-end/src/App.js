@@ -12,8 +12,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/mens" element={ <ShopCategory category="mens"/>} />
-          <Route path="/women" element={<ShopCategory category="mens" /> } />
-          <Route path="/kids" element={<ShopCategory category="mens"/> } />
+          <Route path="/women" element={<ShopCategory category="women" /> } />
+          <Route path="/kids" element={<ShopCategory category="kids"/> } />
         </Routes>
       </Router>
     </div>
