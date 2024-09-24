@@ -14,7 +14,7 @@ export const Navbar = () => {
       </div>
       <ul className="nav-menu">
         <li onClick={()=> {setMenu("shop")}}>
-          shop {menu==="mens"? <hr/> : <></>}
+          shop {menu==="shop"? <hr/> : <></>}
         </li>
         <li onClick={()=> {setMenu("mens")}}>men{menu==="mens"? <hr/> : <></>}</li>
         <li onClick={()=> {setMenu("women")}}>women{menu==="women"? <hr/> : <></>}</li>
