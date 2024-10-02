@@ -15,15 +15,17 @@ export const Navbar = () => {
       </div>
       <ul className="nav-menu">
         <li onClick={()=> {setMenu("shop")}}>
-        <Link to='/'>shop</Link>{menu==="shop"? <hr/> : <></>}
+        <Link to='/' className="nav-link">shop</Link>{menu==="shop"? <hr/> : <></>}
         </li>
-        <li onClick={()=> {setMenu("mens")}}><Link to='/men'>men</Link> {menu==="mens"? <hr/> : <></>}</li>
-        <li onClick={()=> {setMenu("women")}}><Link to='/women'>women</Link>{menu==="women"? <hr/> : <></>}</li>
-        <li onClick={()=> {setMenu("kids")}}><Link to='/kids'>kids</Link>{menu==="kids"? <hr/> : <></>}</li>
+        <li onClick={()=> {setMenu("mens")}}><Link to='/men' className="nav-link">men</Link> {menu==="mens"? <hr/> : <></>}</li>
+        <li onClick={()=> {setMenu("women")}}><Link to='/women' className="nav-link">women</Link>{menu==="women"? <hr/> : <></>}</li>
+        <li onClick={()=> {setMenu("kids")}}><Link to='/kids' className="nav-link">kids</Link>{menu==="kids"? <hr/> : <></>}</li>
       </ul>
       <div className="nav-login-cart">
         <Link to='/login'><button>login</button></Link>        
+        <Link to='/cart'>
         <img src={cart_icon} alt="" />
+        </Link>        
         <div className="nav-cart-count">0</div>
       </div>
     </div>

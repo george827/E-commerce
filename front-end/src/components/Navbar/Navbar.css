@@ -69,3 +69,9 @@
     color: #fff;
 }
 
+.nav-link {
+    text-decoration: none;
+    color: #171717;
+    font-size: 20px;
+    font-weight: 600;
+}
