@@ -16,6 +16,4 @@ const shopContextProvider = (props) => {
 export default shopContextProvider;
 {
     push = {"marie": "
-        {
-        "name": "Marie Biscuit",
-        "price": 10,
+      
