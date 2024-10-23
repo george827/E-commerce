@@ -14,6 +14,3 @@ const shopContextProvider = (props) => {
 }
 
 export default shopContextProvider;
-{
-    push = {"marie": "
-      
