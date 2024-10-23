@@ -19,6 +19,3 @@ export default shopContextProvider;
         {
         "name": "Marie Biscuit",
         "price": 10,
-        "image": "marie.jpg"
-    }"
-}
