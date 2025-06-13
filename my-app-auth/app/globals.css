@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+} */
+
+input {
+  @apply w-[400px] border border-gray-300 rounded-md p-2 text-gray-900;
+}
