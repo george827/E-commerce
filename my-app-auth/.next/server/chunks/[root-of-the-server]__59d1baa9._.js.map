@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 60, "column": 0}, "map": {"version":3,"sources":["file:///D:/web/user%20auth/my-app/app/api/register/route.js"],"sourcesContent":["import { NextResponse } from \"next/server\";\r\n\r\nexport async function POST(request) {\r\n    try {\r\n        const { name, email, password } = await request.json();\r\n        console.log(\"User registered:\", { name, email, password });\r\n\r\n        return NextResponse.json({\r\n            message: \"User registered successfully\"}, {\r\n            status: 201,});\r\n\r\n    }\r\n    catch (error){\r\n        return NextResponse.json({\r\n            error: \"Failed to register user\",\r\n        }, {\r\n            status: 500,\r\n        });\r\n\r\n    }\r\n}"],"names":[],"mappings":";;;AAAA;;AAEO,eAAe,KAAK,OAAO;IAC9B,IAAI;QACA,MAAM,EAAE,IAAI,EAAE,KAAK,EAAE,QAAQ,EAAE,GAAG,MAAM,QAAQ,IAAI;QACpD,QAAQ,GAAG,CAAC,oBAAoB;YAAE;YAAM;YAAO;QAAS;QAExD,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;YACrB,SAAS;QAA8B,GAAG;YAC1C,QAAQ;QAAI;IAEpB,EACA,OAAO,OAAM;QACT,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;YACrB,OAAO;QACX,GAAG;YACC,QAAQ;QACZ;IAEJ;AACJ","debugId":null}}]
+}
