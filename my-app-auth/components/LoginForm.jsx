@@ -12,7 +12,7 @@ export default function LoginForm() {
                     <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2 font-bold">
                         Error message
                     </div>
-                    <Link href="/register" className="mt-3 text-sm ">
+                    <Link href="/register" className="mt-3 text-sm py-4">
                         Don't have an account? <span className="hover:underline text-blue-500">Register here</span>
                     </Link>
                 </form>
