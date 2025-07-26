@@ -9,10 +9,10 @@ export const ShopCategory = (props) => {
   return (
     <div className="shop-category">
       {console.log("all_products:", all_products)}
-      <img src={props.banner} alt="banner" />
+      <img src={props.banner} className="shopCategory-banner" alt="banner" />
       <div className="shopcategory-indexsort">
         <p>
-          <span>showing 1-12</span>
+          <span>showing 1-12 </span>
           out of 36 products
         </p>
         <div className="shopcategory-sort">
@@ -20,15 +20,24 @@ export const ShopCategory = (props) => {
         </div>
       </div>
       <div className="shopcategory-products">
-        {all_products?.map(((item, i) => {
-          if (props.category ===item.category){
-            return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+        {all_products?.map((item, i) => {
+          if (props.category === item.category) {
+            return (
+              <Item
+                key={i}
+                id={item.id}
+                name={item.name}
+                image={item.image}
+                new_price={item.new_price}
+                old_price={item.old_price}
+              />
+            );
           }
           return null;
-
-        }))
-}
-          
+        })}
+      </div>
+      <div className="shopCategory-loadmore">
+        Explore More
       </div>
     </div>
   );
