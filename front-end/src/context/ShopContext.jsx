@@ -1,10 +1,10 @@
 import React, { createContext } from 'react'
-import AllProduct from '../components/assets/Frontend_Assets/all_product'
+import all_products from '../components/assets/Frontend_Assets/all_product'
 
 export const ShopContext = createContext(null);
 
 const ShopContextProvider = (props) => {
-    const contextValue ={AllProduct};
+    const contextValue ={all_products};
 
     return (
         <ShopContext.Provider value={contextValue}>
