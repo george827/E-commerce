@@ -7,7 +7,9 @@ export const Product = () => {
   const {productId} = useParams();
   const product = all_products.find(item => item.id === parseInt(productId));
   return (
-    <div>Product</div>
+    <div>
+      
+    </div>
   )
 }
 
