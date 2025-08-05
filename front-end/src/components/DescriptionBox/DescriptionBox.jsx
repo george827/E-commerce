@@ -13,7 +13,7 @@ export const DescriptionBox = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum 
                 quidem quaerat magni quia deleniti a tempora dicta tempore, incidunt 
                 excepturi exercitationem perferendis veritatis unde fugit necessitatibus,
-                 voluptate similique inventore illum?
+                 voluptate similique 
             </p>
         </div>
     </div>
