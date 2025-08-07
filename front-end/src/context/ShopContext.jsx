@@ -8,6 +8,10 @@ const ShopContextProvider = (props) => {
 
     const getDefaultCart = () => {
         let cart = {};
+        for (let i = 0; i < all_products.length + 1; i++) {
+            cart[i] = 0; // Initialize each product's quantity to 0
+        }
+        return cart;
     }
 
     return (
