@@ -41,3 +41,78 @@
     border-radius: 0.25rem;
     background: #fff;
 }
+
+/* cart items down */
+
+.cartitems-down {
+    display: flex;
+    margin: 100px 0px;
+}
+
+.cartitems-total {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 200px;
+    gap: 40px;
+}
+
+.cartsitems-total-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    /* align-items: center; */
+}
+
+.cartitems-total button {
+    width: 16rem;
+    height: 3.5rem;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.CARTITEMS-PROMOCODE {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+.CARTITEMS-PROMOCODE p {
+    color: #555;
+}
+
+.cartitems-promobox {
+    width: 500px;
+    margin-top: 15px;
+    padding-left: 20px;
+    height: 50px;
+    background: #eaeaea;
+    display: flex;
+}
+
+.cartitems-promobox input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    width: 330px;
+    height: 50px;
+}
+
+.cartitems-promobox button {
+    width: 170px;
+    height: 50px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
