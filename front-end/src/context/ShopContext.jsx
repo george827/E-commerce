@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
 import all_products from '../components/assets/Frontend_Assets/all_product'
 
 export const ShopContext = createContext(null);
@@ -13,7 +13,7 @@ const getDefaultCart = () => {
 
 const ShopContextProvider = (props) => {
 
-    const [cartItem, setCartItem] = React.useState(getDefaultCart());
+    const [cartItem, setCartItem] = useState(getDefaultCart());
 
     const addToCart = (itemId) => {
         setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -31,6 +31,7 @@ const ShopContextProvider = (props) => {
     }
 
     const contextValue ={all_products, cartItem, addToCart, removeFromCart};    
+    console.log("cartitems data", cartItem);
 
     return (
         <ShopContext.Provider value={contextValue}>
