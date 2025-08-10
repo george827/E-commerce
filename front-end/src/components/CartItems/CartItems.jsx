@@ -55,7 +55,7 @@ export const CartItems = () => {
                     <p>Free</p>
                 </div>
                 <hr />
-                <div className="cartsitems-total-item">
+                <div className="cartsitems-total-item item-total">
                     <h3>Total</h3>
                     <h3>${getTotalCartAmount()}</h3>
                 </div>
