@@ -48,3 +48,24 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+@media(max-width:1280px) {
+    .shopCategory-banner {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .shopcategory-indexsort {
+        margin: 0px 50px;
+    }
+
+    .shopcategory-products {
+        margin: 20px 50px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .shopCategory-loadmore {
+        width: 200px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
