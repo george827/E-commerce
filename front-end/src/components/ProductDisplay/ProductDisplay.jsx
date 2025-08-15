@@ -30,7 +30,7 @@ export const ProductDisplay = (props) => {
             <img src={star_dull_icon} alt="" />
             <p>(122)</p>
           </div>
-          <div className="productdisplay-rught-prices">
+          <div className="productdisplay-right-prices">
             <div className="productdisplay-right-prices-old">
               ${product.old_price}
             </div>
