@@ -122,6 +122,12 @@ app.post("/removeproduct", async (req, res) => {
   console.log("Product removed successfully");
 });
 
+// create api for getting all products
+app.get("/products", async (req, res) => {
+  const products = await Product.find({});
+  res.json({ success: true, products });
+});
+
 app.listen(port, (err) => {
   if (!err) {
     console.log(`Server is running http://localhost:${port}`);
