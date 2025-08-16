@@ -126,7 +126,7 @@ app.post("/removeproduct", async (req, res) => {
 app.get("/allproducts", async (req, res) => {
   const products = await Product.find({});
   console.log("All products retrieved successfully");
-  res.json({ success: true, products });
+  res.json({ products });
 });
 
 app.listen(port, (err) => {
