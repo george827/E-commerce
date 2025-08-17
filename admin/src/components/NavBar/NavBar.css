@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: #fff;
+  /* border-bottom: 1px solid #eee; */
+  box-shadow: 0 1px 3px -2px #000;
+  margin-bottom: 1px;
+}
+
+.nav-logo {
+  height: 50px;
+}
+
+.nav-profile {
+  height: 50px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+  }
+
+  .nav-logo,
+  .nav-profile {
+    height: 40px;
+  }
+}
