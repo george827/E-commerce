@@ -25,6 +25,7 @@ export const AddProduct = () => {
             [name]: value
         });
     };
+    const AddProduct;
 
     const Add_product = async () => {
         console.log(productData);
