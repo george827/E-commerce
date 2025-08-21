@@ -52,9 +52,20 @@ export const AddProduct = () => {
         if (responseData.success) {
             // Handle successful upload
             product.image = responseData.image_url;
-            console.log("product", product);
+            console.log(product);
+
+            await fetch('http://localhost:4000/addproduct', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            }).then((response) => response.json()).then((data) => {
+                data.success? alert("Product added"): alert("Error adding product");
+            });
         }
-    };
+    }
   return (
     <div className="add-product">
       <div className="addproduct-itemfield">
