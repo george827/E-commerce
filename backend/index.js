@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const cors = require("cors");
 const path = require("path");
+const fs = require("fs");
 
 app.use(express.json());
 app.use(cors());
@@ -115,11 +116,50 @@ app.post("/addproduct", async (req, res) => {
 });
 
 // Creating Api for deleting products
+// app.post("/removeproduct", async (req, res) => {
+//   const { id, name } = req.body;
+//   await Product.findOneAndDelete({ id });
+//   res.json({ success: true, message: "Product removed successfully", name });
+//   console.log("Product removed successfully");
+// });
+
+
+//  want to remove product and also delete image in upload/images
+
 app.post("/removeproduct", async (req, res) => {
-  const { id, name } = req.body;
-  await Product.findOneAndDelete({ id });
-  res.json({ success: true, message: "Product removed successfully", name });
-  console.log("Product removed successfully");
+  const { id } = req.body;
+
+  try {
+    // Find the product first
+    const product = await Product.findOne({ id });
+
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    // Extract image filename from product (assuming it's stored as a URL)
+    const imageUrl = product.image;
+    const filename = imageUrl.split("/").pop(); // Get the filename from the URL
+
+    // Delete the image file
+    const imagePath = path.join(__dirname, "upload", "images", filename);
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.error("Error deleting image:", err);
+        // You can choose to continue or halt here depending on your needs
+      } else {
+        console.log("Image deleted successfully");
+      }
+    });
+
+    // Delete the product from DB
+    await Product.findOneAndDelete({ id });
+
+    res.json({ success: true, message: "Product removed successfully", name: product.name });
+  } catch (error) {
+    console.error("Error removing product:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
 });
 
 // create api for getting all products
