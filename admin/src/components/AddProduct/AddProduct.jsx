@@ -1,14 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/Admin_Assets/upload_area.svg'
 
 
 export const AddProduct = () => {
-    const [image, setImage] = React.useState(false);
-    const [preview, setPreview] = React.useState(null);
+    const [image, setImage] = useState(false);
+    const [preview, setPreview] = useState(null);
 
 
-    const [productData, setProductData] = React.useState({
+    const [productData, setProductData] = useState({
         name: '',
         old_price: '',
         new_price: '',
