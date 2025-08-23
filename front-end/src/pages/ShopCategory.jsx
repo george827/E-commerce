@@ -20,7 +20,7 @@ export const ShopCategory = (props) => {
         </div>
       </div>
       <div className="shopcategory-products">
-        {all_products?.map((item, i) => {
+        {all_products && all_products?.map((item, i) => {
           if (props.category === item.category) {
             return (
               <Item

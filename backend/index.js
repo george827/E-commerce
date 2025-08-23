@@ -105,9 +105,8 @@ app.post("/addproduct", async (req, res) => {
     old_price,
   });
 
-  console.log("Product data:", product);
+
   await product.save();
-  console.log("Product added successfully");
   res.json({
     success: true,
     name: req.body.name,
@@ -165,7 +164,6 @@ app.post("/removeproduct", async (req, res) => {
 // create api for getting all products
 app.get("/allproducts", async (req, res) => {
   const products = await Product.find({});
-  console.log("All products retrieved successfully");
   res.json({ products });
 });
 
@@ -251,6 +249,83 @@ app.post("/login", async (req, res) => {
   };
   const token = jwt.sign(data, "jwt_secret");
   res.json({ success: true, message: "User logged in successfully", token });
+});
+
+// create end points for new collection
+app.get('/newcollections', async (req, res) => {
+  // const products = await Product.find({ category: "New Collection" });
+  const products = await Product.find({ });
+  let newCollections =products.slice(-8);
+  res.send(newCollections);
+});
+
+// create endpoint for popular in women category
+app.get('/popularwomen', async (req, res) => {
+  const products = await Product.find({ category: "women" });
+  let popularProducts = products.slice(-4);
+  res.send(popularProducts);
+});
+
+// creating middleware to fetch user
+const fetchUser = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, "jwt_secret");
+    req.userId = decoded.user.id;
+    next();
+  } catch (error) {
+    console.error("Error verifying token:", error);
+    res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+};
+
+// create endpoint for adding product in cart
+app.post('/addtocart', fetchUser, async (req, res) => {
+  const { itemId } = req.body;
+
+  // Find the user by ID
+  const userData = await Users.findOne({ _id: req.userId });
+  if (!userData) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+  userData.cartData[itemId] = (userData.cartData[itemId] || 0) + 1; // Increment quantity
+
+
+  await Users.findOneAndUpdate({ _id: req.userId }, { cartData: userData.cartData });
+  res.json({ success: true, message: "Product added to cart", cartData: userData.cartData });
+});
+
+//remove cart from user cart data
+app.post('/removecart', fetchUser, async (req, res) => {
+  const { itemId } = req.body;
+
+  // Find the user by ID
+  const userData = await Users.findOne({ _id: req.userId });
+  if (!userData) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+  if (userData.cartData[itemId] > 0) {
+    userData.cartData[itemId] -= 1; // Decrement quantity
+  }
+
+  await Users.findOneAndUpdate({ _id: req.userId }, { cartData: userData.cartData });
+  res.json({ success: true, message: "Product removed from cart", cartData: userData.cartData });
+});
+
+// Creating end point to get cartdata
+app.get('/getcartdata', fetchUser, async (req, res) => {
+  // Find the user by ID
+  const userData = await Users.findOne({ _id: req.userId });
+
+  if (!userData) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+
+  res.json({ success: true, cartData: userData.cartData });
 });
 
 app.listen(port, (err) => {

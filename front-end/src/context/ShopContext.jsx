@@ -1,11 +1,12 @@
-import React, { createContext, useState } from 'react'
-import all_products from '../components/assets/Frontend_Assets/all_product'
+import React, { createContext, useState, useEffect } from 'react'
+import { use } from 'react';
+// import all_products from '../components/assets/Frontend_Assets/all_product'
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
         let cart = {};
-        for (let i = 0; i < all_products.length + 1; i++) {
+        for (let i = 0; i < 300 + 1; i++) {
             cart[i] = 0; // Initialize each product's quantity to 0
         }
         return cart;
@@ -13,10 +14,61 @@ const getDefaultCart = () => {
 
 const ShopContextProvider = (props) => {
 
-    const [cartItem, setCartItem] = useState(getDefaultCart());   
+    const [cartItem, setCartItem] = useState(getDefaultCart());
+    const [all_products, setAllProducts] = useState([]);
+
+    useEffect(() => {
+        // Fetch all products from the API or use the imported data
+        const fetchProducts = async () => {
+            const response = await fetch("http://localhost:4000/allproducts")
+            .then(res => res.json())
+            .then(data => {
+                setAllProducts(data.products);
+            });
+        };
+        fetchProducts();
+        if (localStorage.getItem("token")) {
+            fetch("http://localhost:4000/getcartdata", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setCartItem(data.cartData);
+                }
+            })
+            .catch(err => {
+                console.error("Error fetching cart data:", err);
+            });
+        }
+    }, []);
 
     const addToCart = (itemId) => {
         setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+        if (localStorage.getItem("token")) {
+            fetch("http://localhost:4000/addtocart", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({ itemId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Product added");
+            })
+            .catch(err => {
+                console.error("Error adding product to cart:", err);
+            });
+        }
+
     }
 
     const removeFromCart = (itemId) => {
@@ -28,6 +80,24 @@ const ShopContextProvider = (props) => {
             return newCart;
         }
         );
+        if (localStorage.getItem("token")) {
+            fetch("http://localhost:4000/removecart", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({ itemId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Product removed from cart:");
+            })
+            .catch(err => {
+                console.error("Error removing product from cart:", err);
+            });
+        }
     }
 
     const getTotalCartAmount = () => {
@@ -50,7 +120,6 @@ const ShopContextProvider = (props) => {
     }
 
     const contextValue ={cartCount, getTotalCartAmount, all_products, cartItem, addToCart, removeFromCart};    
-    console.log("cartitems data", cartItem);
 
     return (
         <ShopContext.Provider value={contextValue}>

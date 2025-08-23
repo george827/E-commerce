@@ -4,6 +4,15 @@ import new_collections from '../assets/Frontend_Assets/new_collections'
 import Item from '../Item/Item'
 
 const NewCollection = () => {
+  const [new_collections, setNewCollections] = React.useState([]);
+  React.useEffect(() => {
+    const fetchNewCollections = async () => {
+      const response = await fetch("http://localhost:4000/newcollections");
+      const data = await response.json();
+      setNewCollections(data);
+    };
+    fetchNewCollections();
+  }, []);
   return (
     <div className='new-collections'>
         <h1>New Collections</h1>
