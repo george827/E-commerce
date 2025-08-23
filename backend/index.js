@@ -169,6 +169,90 @@ app.get("/allproducts", async (req, res) => {
   res.json({ products });
 });
 
+// schema creating for model
+const Users = mongoose.model("Users", {
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    eunique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  cartData: {
+    type: Object,
+    default: {},
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Creating endpoint for user registration
+
+app.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // Check if user already exists
+  const existingUser = await Users.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ success: false, message: "User already exists" });
+  }
+
+  let cartData = {};
+  for (let i = 0; i < 300; i++) {
+    cartData[i] = 0;
+  }
+
+  // Create new user
+  const user = new Users({
+    name,
+    email,
+    password,
+    cartData,
+  });
+
+  await user.save();
+
+  const data = {
+    user: {
+      id: user.id,
+    },
+  };
+  const token = jwt.sign(data, "jwt_secret");
+  res.json({ success: true, message: "User registered successfully", token });
+});
+
+// Creating endpoint for user login
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  // Check if user exists
+  const user = await Users.findOne({ email });
+  if (!user) {
+    return res.status(400).json({ success: false, message: "Invalid credentials" });
+  }
+
+  // Check password (you should hash passwords in a real app)
+  if (user.password !== password) {
+    return res.status(400).json({ success: false, message: "Invalid credentials" });
+  }
+
+  const data = {
+    user: {
+      id: user.id,
+    },
+  };
+  const token = jwt.sign(data, "jwt_secret");
+  res.json({ success: true, message: "User logged in successfully", token });
+});
+
 app.listen(port, (err) => {
   if (!err) {
     console.log(`Server is running http://localhost:${port}`);
