@@ -79,11 +79,11 @@ export const Navbar = () => {
               window.location.href = "/login";
             }}
           >
-            logout
+            Logout
           </button>
         ) : (
           <Link to="/login">
-            <button>login</button>
+            <button>Login</button>
           </Link>
         )}
         <Link to="/cart">
